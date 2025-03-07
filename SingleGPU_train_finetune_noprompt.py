@@ -64,6 +64,12 @@ def train_model(trainloader,valloader,dir_checkpoint,epochs):
         for n, value in sam.image_encoder.named_parameters():
             value.requires_grad = False
     elif args.finetune_type == 'lora':
+
+        args.if_update_encoder = True
+        args.if_encoder_lora_layer = True
+        args.encoder_lora_layer = []
+        args.if_decoder_lora_layer = True 
+
         print('if update encoder:',args.if_update_encoder)
         print('if image encoder lora:',args.if_encoder_lora_layer)
         print('if mask decoder lora:',args.if_decoder_lora_layer)

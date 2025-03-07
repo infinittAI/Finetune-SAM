@@ -1,21 +1,21 @@
 #!/bin/bash
 
 # Set CUDA device
-export CUDA_VISIBLE_DEVICES="5"
+export CUDA_VISIBLE_DEVICES="0"
 
 # Define variables
 arch="vit_b"  # Change this value as needed
-finetune_type="adapter"
-dataset_name="MRI-Prostate"  # Assuming you set this if it's dynamic
+finetune_type="lora"
+dataset_name="DigitalPathology"  # Assuming you set this if it's dynamic
 targets='combine_all' # make it as binary segmentation 'multi_all' for multi cls segmentation
 # Construct train and validation image list paths
 img_folder="./datasets"  # Assuming this is the folder where images are stored
-train_img_list="${img_folder}/${dataset_name}/train_5shot.csv"
-val_img_list="${img_folder}/${dataset_name}/val_5shot.csv"
+train_img_list="${img_folder}/${dataset_name}/train_DPdata.csv"
+val_img_list="${img_folder}/${dataset_name}/valid_DPdata.csv"
 
 
 # Construct the checkpoint directory argument
-dir_checkpoint="2D-SAM_${arch}_decoder_${finetune_type}_${dataset_name}_noprompt"
+dir_checkpoint="2D-SAM_${arch}_encoderdecoder_${finetune_type}_${dataset_name}_noprompt"
 
 # Run the Python script
 python SingleGPU_train_finetune_noprompt.py \
